@@ -1,0 +1,564 @@
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hesed - Simulador de Design System e IA</title>
+    <!-- Tailwind CSS para estilização rápida e responsiva -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Lora (serifa clássica) e Plus Jakarta Sans (sans-serif moderna) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .font-serif {
+            font-family: 'Lora', serif;
+        }
+        .color-transition {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        /* Custom scrollbar para o simulador de celular */
+        .custom-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background: rgba(100, 116, 139, 0.2);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between">
+
+    <!-- Cabeçalho -->
+    <header class="border-b border-slate-800 bg-slate-950/60 backdrop-blur py-4 px-6 z-10">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-600 flex items-center justify-center shadow-lg shadow-emerald-950/40">
+                    <span class="text-white font-serif font-bold text-xl">H</span>
+                </div>
+                <div>
+                    <h1 class="font-serif text-lg font-bold tracking-tight text-white">Hesed</h1>
+                    <p class="text-xs text-slate-400">Playground de Cores, Identidade & Geração de Imagens com IA</p>
+                </div>
+            </div>
+            <div class="text-center sm:text-right">
+                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Foco: Premium e Elegante (25-45 anos)</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Painel de Configuração e Geração por IA (Esquerda) -->
+        <section class="lg:col-span-6 bg-slate-950/80 border border-slate-800 rounded-3xl p-6 shadow-2xl space-y-6">
+            <div>
+                <h2 class="text-xl font-serif font-semibold text-white mb-2">1. Selecione a Paleta de Cores</h2>
+                <p class="text-xs text-slate-400">Clique para mudar instantaneamente as cores do aplicativo simulado no celular à direita.</p>
+            </div>
+
+            <!-- Botões das Cinco Paletas -->
+            <div class="space-y-2.5 max-h-[320px] overflow-y-auto pr-1 custom-scroll">
+                <!-- Paleta A -->
+                <button onclick="applyPalette('linho')" id="btn-linho" class="w-full flex items-center justify-between p-3.5 rounded-2xl border bg-slate-900/40 hover:bg-slate-900/80 transition text-left border-slate-800 active-palette-btn">
+                    <div class="flex items-center gap-3">
+                        <div class="flex -space-x-2">
+                            <span class="w-6 h-6 rounded-full border border-slate-950 block" style="background-color: #FAF5EF;"></span>
+                            <span class="w-6 h-6 rounded-full border border-slate-950 block" style="background-color: #251F1C;"></span>
+                            <span class="w-6 h-6 rounded-full border border-slate-950 block" style="background-color: #2B3A31;"></span>
+                            <span class="w-6 h-6 rounded-full border border-slate-950 block" style="background-color: #C2593F;"></span>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-white">Opção A: Linho e Carvalho</p>
+                            <p class="text-[10px] text-slate-400">Orgânica e acolhedora, inspirada em cafés e livros.</p>
+                        </div>
+                    </div>
+                    <span class="text-emerald-500 text-sm" id="check-linho">✓</span>
+                </button>
+
+                <!-- Paleta B -->
+                <button onclick="applyPalette('nevoa')" id="btn-nevoa" class="w-full flex items-center justify-between p-3.5 rounded-2xl border bg-slate-900/40 hover:bg-slate-900/80 transition text-left border-slate-800">
+                    <div class="flex items-center gap-3">
+                        <div class="flex -space-x-2">
+                            <span class="w-6 h-6 rounded-full border border-slate-950 block" style="background-color: #F4F6F7;"></span>
+                            <span class="w-6 h-6 rounded-full border border-slate-950 block" style="background-color: #1E293B;"></span>
+                            <span class="w-6 h-6 rounded-full border border-slate-950 block" style="background-color: #1B2E46;"></span>
+                            <span class="w-6 h-6 rounded-full border border-slate-950 block" style="background-color: #C59B27;"></span>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-white">Opção B: Névoa e Safira</p>
+                            <p class="text-[10px] text-slate-400">Sóbria, clássica, intelectual e de padrão corporativo.</p>
+                        </div>
+                    </div>
+                    <span class="text-emerald-500 text-sm hidden" id="check-nevoa">✓</span>
+                </button>
+
+                <!-- Paleta C -->
+                <button onclick="applyPalette('florestal')" id="btn-florestal" class="w-full flex items-center justify-between p-3.5 rounded-2xl border bg-slate-900/40 hover:bg-slate-900/80 transition text-left border-slate-800">
+                    <div class="flex items-center gap-3">
+                        <div class="flex -space-x-2">
+                            <span class="w-6 h-6 rounded-full border border-slate-950 block" style="background-color: #FAF9F6;"></span>
+                            <span class="w-6 h-6 rounded-full border border-slate-950 block" style="background-color: #131E19;"></span>
+                            <span class="w-6 h-6 rounded-full border border-slate-950 block" style="background-color: #879E90;"></span>
+                            <span class="w-6 h-6 rounded-full border border-slate-950 block" style="background-color: #DF6B53;"></span>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-white">Opção C: Florestal e Coral</p>
+                            <p class="text-[10px] text-slate-400">Contemporânea, nórdica, com contraste moderno vanguardista.</p>
+                        </div>
+                    </div>
+                    <span class="text-emerald-500 text-sm hidden" id="check-florestal">✓</span>
+                </button>
+
+                <!-- Paleta D (Nova!) -->
+                <button onclick="applyPalette('eucalipto')" id="btn-eucalipto" class="w-full flex items-center justify-between p-3.5 rounded-2xl border bg-slate-900/40 hover:bg-slate-900/80 transition text-left border-slate-800">
+                    <div class="flex items-center gap-3">
+                        <div class="flex -space-x-2">
+                            <span class="w-6 h-6 rounded-full border border-slate-950 block" style="background-color: #F3F6F4;"></span>
+                            <span class="w-6 h-6 rounded-full border border-slate-950 block" style="background-color: #1F2A23;"></span>
+                            <span class="w-6 h-6 rounded-full border border-slate-950 block" style="background-color: #5D7A68;"></span>
+                            <span class="w-6 h-6 rounded-full border border-slate-950 block" style="background-color: #D2735C;"></span>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-white">Opção D: Eucalipto e Argila</p>
+                            <p class="text-[10px] text-slate-400">Serena, natural, inspirada em cura e equilíbrio emocional.</p>
+                        </div>
+                    </div>
+                    <span class="text-emerald-500 text-sm hidden" id="check-eucalipto">✓</span>
+                </button>
+
+                <!-- Paleta E (Nova!) -->
+                <button onclick="applyPalette('papiro')" id="btn-papiro" class="w-full flex items-center justify-between p-3.5 rounded-2xl border bg-slate-900/40 hover:bg-slate-900/80 transition text-left border-slate-800">
+                    <div class="flex items-center gap-3">
+                        <div class="flex -space-x-2">
+                            <span class="w-6 h-6 rounded-full border border-slate-950 block" style="background-color: #FAF8F4;"></span>
+                            <span class="w-6 h-6 rounded-full border border-slate-950 block" style="background-color: #1A1A1A;"></span>
+                            <span class="w-6 h-6 rounded-full border border-slate-950 block" style="background-color: #72706D;"></span>
+                            <span class="w-6 h-6 rounded-full border border-slate-950 block" style="background-color: #B58A59;"></span>
+                        </div>
+                        <div>
+                            <p class="text-xs font-semibold text-white">Opção E: Papiro e Ébano</p>
+                            <p class="text-[10px] text-slate-400">Estética erudita, minimalista clássica e intelectual de alto nível.</p>
+                        </div>
+                    </div>
+                    <span class="text-emerald-500 text-sm hidden" id="check-papiro">✓</span>
+                </button>
+            </div>
+
+            <!-- Seção de Geração de Imagens com IA -->
+            <div class="border-t border-slate-800 pt-6 space-y-4">
+                <div>
+                    <h2 class="text-xl font-serif font-semibold text-white mb-2">2. Gerador de Imagens Integrado</h2>
+                    <p class="text-xs text-slate-400">Gere fotos de exemplo com a inteligência do <b>Imagen 4.0</b>. O prompt é adaptado automaticamente para seguir a estética da paleta ativa!</p>
+                </div>
+
+                <!-- Presets Rápidos -->
+                <div class="space-y-1.5">
+                    <label class="text-[10px] font-bold tracking-wider uppercase text-slate-400">Estilos de Imagem (Presets)</label>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                        <button onclick="selectPreset('casal')" class="text-left p-2.5 rounded-xl border border-slate-800 hover:border-slate-700 bg-slate-900/30 text-xs transition">
+                            👥 <b>Casal em Cafeteria</b><br>
+                            <span class="text-[10px] text-slate-500">Espontâneo, conversando, aconchegante.</span>
+                        </button>
+                        <button onclick="selectPreset('mulher')" class="text-left p-2.5 rounded-xl border border-slate-800 hover:border-slate-700 bg-slate-900/30 text-xs transition">
+                            👩 <b>Retrato Feminino</b><br>
+                            <span class="text-[10px] text-slate-500">Moça de 29 anos sorrindo, luz natural do sol.</span>
+                        </button>
+                        <button onclick="selectPreset('homem')" class="text-left p-2.5 rounded-xl border border-slate-800 hover:border-slate-700 bg-slate-900/30 text-xs transition">
+                            👨 <b>Retrato Masculino</b><br>
+                            <span class="text-[10px] text-slate-500">Homem de 33 anos sorrindo, fundo de livraria.</span>
+                        </button>
+                        <button onclick="selectPreset('leitura')" class="text-left p-2.5 rounded-xl border border-slate-800 hover:border-slate-700 bg-slate-900/30 text-xs transition">
+                            📖 <b>Livros e Café</b><br>
+                            <span class="text-[10px] text-slate-500">Estilo editorial, xícara de café e livro aberto.</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Input Customizável do Prompt -->
+                <div class="space-y-2">
+                    <label class="text-[10px] font-bold tracking-wider uppercase text-slate-400">Prompt Customizado</label>
+                    <textarea id="prompt-input" rows="3" class="w-full bg-slate-900 border border-slate-850 rounded-xl p-3 text-xs text-white focus:outline-none focus:ring-1 focus:ring-emerald-500 focus:border-emerald-500 resize-none" placeholder="Digite ou escolha um preset de foto acima..."></textarea>
+                    <!-- Indicador visual da instrução de cor oculta que será enviada à API -->
+                    <p class="text-[10px] text-slate-500 italic bg-slate-900/50 p-2 rounded-lg" id="color-rule-hint">
+                        ✨ A paleta <b>Linho e Carvalho</b> será injetada para garantir a harmonia cromática nas fotos!
+                    </p>
+                </div>
+
+                <!-- Botão de Ação -->
+                <button onclick="generateAIImage()" id="btn-generate" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 active:scale-[0.99] transition font-semibold text-xs text-white flex items-center justify-center gap-2 shadow-lg shadow-emerald-950/50">
+                    <span id="btn-icon">⚡</span>
+                    <span id="btn-text">Gerar Foto de Perfil com IA</span>
+                </button>
+                
+                <!-- Feedback Box -->
+                <div id="error-box" class="hidden p-3 rounded-xl bg-rose-500/10 border border-rose-500/20 text-xs text-rose-400"></div>
+            </div>
+        </section>
+
+        <!-- Simulador de Celular com Visualização do App (Direita) -->
+        <section class="lg:col-span-6 flex justify-center items-center w-full">
+            <!-- Moldura do Celular -->
+            <div class="w-full max-w-[370px] h-[750px] bg-slate-950 rounded-[48px] p-3.5 shadow-2xl border-4 border-slate-800 relative flex flex-col justify-between overflow-hidden">
+                
+                <!-- Notch Dinâmico -->
+                <div class="absolute top-0 left-1/2 transform -translate-x-1/2 w-28 h-5.5 bg-slate-800 rounded-b-2xl z-50 flex items-center justify-center">
+                    <div class="w-10 h-1 bg-slate-900 rounded-full"></div>
+                </div>
+
+                <!-- Tela do Aplicativo -->
+                <div id="app-screen" class="w-full h-full rounded-[36px] color-transition overflow-y-auto flex flex-col justify-between pt-7 pb-3 px-3 scrollbar-thin scrollbar-thumb-slate-800" style="background-color: #FAF5EF;">
+                    
+                    <!-- Barra de Status Superior -->
+                    <div class="flex items-center justify-between px-1.5 mb-3 mt-1">
+                        <span id="app-brand" class="font-serif font-bold text-base color-transition text-[#251F1C]">Hesed</span>
+                        <!-- Ícone de Filtros -->
+                        <div class="flex items-center gap-1.5 text-xs text-slate-500">
+                            <span>📶</span>
+                            <span>🔋</span>
+                        </div>
+                    </div>
+
+                    <!-- Card de Visualização do Perfil -->
+                    <div id="profile-card" class="bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-200/50 flex-grow flex flex-col justify-between">
+                        
+                        <!-- container da Foto com Gradiente e Botões -->
+                        <div class="h-60 relative w-full overflow-hidden">
+                            <!-- Overlay de Gradiente -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent z-10"></div>
+                            
+                            <!-- Imagem Principal (Substituível por IA) -->
+                            <div id="loading-spinner" class="hidden absolute inset-0 bg-slate-950/90 z-30 flex flex-col items-center justify-center gap-3">
+                                <div class="w-8 h-8 rounded-full border-4 border-emerald-500/20 border-t-emerald-500 animate-spin"></div>
+                                <p class="text-[10px] text-slate-400 font-mono tracking-wider animate-pulse">GERANDO IMAGEM COM IA...</p>
+                            </div>
+                            
+                            <div id="photo-container" class="absolute inset-0 z-0 bg-cover bg-center color-transition" style="background-image: linear-gradient(135deg, #FAF5EF 0%, #2B3A31 100%);">
+                                <!-- Fallback SVG ou Textura quando não há imagem de IA -->
+                                <div id="photo-placeholder" class="w-full h-full flex flex-col items-center justify-center p-6 text-center text-slate-700/40">
+                                    <span class="text-4xl mb-1">⛪</span>
+                                    <p class="text-[10px] font-bold tracking-wider uppercase">Gere uma foto de inteligência ao lado</p>
+                                </div>
+                            </div>
+
+                            <!-- Dados Rápidos de Perfil (Apoiados na Foto) -->
+                            <div class="absolute bottom-3 left-3 z-20 text-white">
+                                <div class="flex items-center gap-1.5 mb-0.5">
+                                    <h3 class="font-serif text-lg font-bold">Beatriz, 29</h3>
+                                    <!-- Selo Verificado em Ouro/Dourado -->
+                                    <span id="badge-verified" class="w-4 h-4 rounded-full flex items-center justify-center text-[9px] text-slate-950 font-bold shadow-sm" style="background-color: #C2593F; color: #FFFFFF;" title="Identidade Verificada">✓</span>
+                                </div>
+                                <p class="text-[10px] text-white/95">Belo Horizonte, MG</p>
+                            </div>
+
+                            <!-- Nota de Compatibilidade do Match -->
+                            <div id="match-tag" class="absolute top-3 right-3 z-20 backdrop-blur px-2.5 py-1.5 rounded-xl flex items-center gap-1 shadow-md border border-white/10" style="background-color: rgba(37, 31, 28, 0.8);">
+                                <span class="text-[9px] font-semibold text-slate-300 uppercase tracking-wider">Afinidade</span>
+                                <span id="match-percent" class="text-[10px] font-bold text-white px-1.5 py-0.5 rounded-md" style="background-color: #C2593F;">89%</span>
+                            </div>
+                        </div>
+
+                        <!-- Conteúdo Biográfico com Rolagem -->
+                        <div class="p-3.5 space-y-4 flex-grow overflow-y-auto max-h-[230px] custom-scroll text-slate-800">
+                            <!-- Tags e Informações Eclesiásticas -->
+                            <div class="flex flex-wrap gap-1">
+                                <span class="app-tag px-2 py-0.5 rounded-full text-[9px] font-semibold tracking-wide border color-transition" style="background-color: #FAF5EF; border-color: #2B3A31; color: #251F1C;">BATISTA TRADICIONAL</span>
+                                <span class="app-tag px-2 py-0.5 rounded-full text-[9px] font-semibold tracking-wide border color-transition" style="background-color: #FAF5EF; border-color: #2B3A31; color: #251F1C;">ARMINIANA</span>
+                                <span class="app-tag px-2 py-0.5 rounded-full text-[9px] font-semibold tracking-wide border color-transition" style="background-color: #FAF5EF; border-color: #2B3A31; color: #251F1C;">MEMBRO ATIVO</span>
+                            </div>
+
+                            <!-- O Cantinho do Testemunho (Citação) -->
+                            <div class="space-y-1">
+                                <h4 class="text-[9px] font-bold tracking-wider uppercase text-slate-400" id="header-faith">Caminhada com Cristo</h4>
+                                <blockquote id="testimony-text" class="text-[11px] italic leading-relaxed text-slate-600 border-l-2 pl-2.5 color-transition" style="border-color: #C2593F;">
+                                    "Fui alcançada pela graça aos 17 anos. Hoje sirvo no ministério de pequenos grupos. Busco alguém que priorize o compromisso real e o amor leal."
+                                </blockquote>
+                            </div>
+
+                            <!-- Tags de Afinidade do Bloco D -->
+                            <div class="space-y-1">
+                                <h4 class="text-[9px] font-bold tracking-wider uppercase text-slate-400" id="header-interests">Interesses comuns</h4>
+                                <div class="flex flex-wrap gap-1">
+                                    <span class="app-subtag px-2 py-0.5 rounded text-[9px] font-medium color-transition" style="background-color: rgba(194, 89, 63, 0.1); color: #C2593F;">C.S. Lewis</span>
+                                    <span class="app-subtag px-2 py-0.5 rounded text-[9px] font-medium color-transition" style="background-color: rgba(194, 89, 63, 0.1); color: #C2593F;">Café Especial</span>
+                                    <span class="app-subtag px-2 py-0.5 rounded text-[9px] font-medium color-transition" style="background-color: rgba(194, 89, 63, 0.1); color: #C2593F;">Trilhas</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Barra de Ações na Base do Card -->
+                        <div class="border-t border-slate-100 p-2.5 bg-slate-50/50 flex items-center justify-between">
+                            <!-- Botão Pular (X) -->
+                            <button class="w-9 h-9 rounded-xl border border-slate-200 flex items-center justify-center text-slate-400 hover:text-slate-600 active:scale-95 transition-all">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                            </button>
+                            
+                            <!-- Botão de Interesse de Maior Destaque -->
+                            <button id="btn-interest" class="flex-grow ml-2 h-9 rounded-xl text-white text-[11px] font-semibold flex items-center justify-center gap-1 shadow-sm active:scale-[0.98] transition-all color-transition" style="background-color: #C2593F;">
+                                <span>Demonstrar Interesse</span>
+                                <span class="text-xs">⚓</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Barra de Navegação Inferior -->
+                    <div class="flex items-center justify-around mt-3 pt-2 border-t border-slate-200/40 text-slate-400">
+                        <span id="nav-feed" class="text-xs font-semibold flex flex-col items-center gap-0.5 color-transition text-emerald-800">
+                            <span class="text-base">🎴</span>
+                            <span class="text-[8px] uppercase tracking-wider">Feed</span>
+                        </span>
+                        <span class="text-xs flex flex-col items-center gap-0.5 hover:text-slate-600 transition">
+                            <span class="text-base">💬</span>
+                            <span class="text-[8px] uppercase tracking-wider">Conversas</span>
+                        </span>
+                        <span class="text-xs flex flex-col items-center gap-0.5 hover:text-slate-600 transition">
+                            <span class="text-base">👤</span>
+                            <span class="text-[8px] uppercase tracking-wider">Conta</span>
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="border-t border-slate-800 bg-slate-950 py-4 px-6 text-center text-xs text-slate-500">
+        <p>&copy; 2026 Hesed. Todos os direitos reservados. Projeto em conformidade com a LGPD e o padrão teológico.</p>
+    </footer>
+
+    <!-- Lógica de Customização e Integração com a API do Gemini -->
+    <script>
+        // Configuração das Paletas (Expandida para 5 opções!)
+        const palettes = {
+            linho: {
+                name: "Linho e Carvalho",
+                bg: "#FAF5EF",
+                text: "#251F1C",
+                support: "#2B3A31", // Oliva
+                accent: "#C2593F", // Terracota
+                bgHex: "Warm Sand (#FAF5EF)",
+                accentLabel: "Terracota Mate",
+                promptColors: "warm sand, dark oak wood tones, forest green and terracota, cozy cafe atmosphere",
+                textHex: "#251F1C"
+            },
+            nevoa: {
+                name: "Névoa e Safira",
+                bg: "#F4F6F7",
+                text: "#1E293B",
+                support: "#1B2E46", // Safira
+                accent: "#C59B27", // Ouro Antigo
+                bgHex: "Névoa Mineral (#F4F6F7)",
+                accentLabel: "Ouro Antigo",
+                promptColors: "mineral mist gray, deep slate blue, classical navy and gold accents, vintage library environment",
+                textHex: "#1E293B"
+            },
+            florestal: {
+                name: "Florestal e Coral",
+                bg: "#FAF9F6",
+                text: "#131E19",
+                support: "#879E90", // Sálvia
+                accent: "#DF6B53", // Coral
+                bgHex: "Marfim Soft (#FAF9F6)",
+                accentLabel: "Coral Queimado",
+                promptColors: "soft ivory, dark absolute forest green, sage green and coral terracotta tones, Scandinavian minimalist style",
+                textHex: "#131E19"
+            },
+            eucalipto: {
+                name: "Eucalipto e Argila",
+                bg: "#F3F6F4",
+                text: "#1F2A23",
+                support: "#5D7A68", // Eucalipto
+                accent: "#D2735C", // Argila
+                bgHex: "Eucalipto Claro (#F3F6F4)",
+                accentLabel: "Argila Mate",
+                promptColors: "very soft sage green-gray background, deep eucalyptus foliage colors, terracotta pottery textures, serene natural daylighting",
+                textHex: "#1F2A23"
+            },
+            papiro: {
+                name: "Papiro e Ébano",
+                bg: "#FAF8F4",
+                text: "#1A1A1A",
+                support: "#72706D", // Pedra
+                accent: "#B58A59", // Latão/Bronze
+                bgHex: "Papiro Claro (#FAF8F4)",
+                accentLabel: "Latão Escovado",
+                promptColors: "ancient papyrus paper texture, dark ebony charcoal values, warm brass and vintage bronze details, architectural clean lines, sophisticated lighting",
+                textHex: "#1A1A1A"
+            }
+        };
+
+        // Estado do Aplicativo
+        let currentPaletteKey = 'linho';
+        const apiKey = ""; // A chave é fornecida pelo runtime automaticamente
+
+        // Presets de Prompts para o Gerador
+        const prompts = {
+            casal: "A candid spontaneous photograph of an attractive Christian couple in their early 30s having a deep warm conversation inside a beautiful minimalist boutique coffee shop. Natural soft volumetric lighting, shot on 35mm lens, highly detailed faces, looking happy and genuine, color-graded to match: ",
+            mulher: "A beautiful natural candid lifestyle portrait of a 29-year-old Brazilian Christian woman, looking at the camera with a gentle warm smile, holding a ceramic coffee cup in a sunny park with soft blurred foliage in the background, elegant, authentic, color-graded to match: ",
+            homem: "A professional authentic lifestyle portrait of a 33-year-old Christian man with a warm friendly smile, sitting in a cozy study room with a bookcase of theological books behind him, soft ambient lighting, style of design magazine, color-graded to match: ",
+            leitura: "An elegant editorial macro flatlay photograph of an open physical bible, a warm cup of coffee with latte art on a rustic wooden table, with natural warm sunlight casting soft shadows, peaceful and quiet devotions vibe, color-graded to match: "
+        };
+
+        // Aplica a Paleta no Celular do Simulador
+        function applyPalette(key) {
+            currentPaletteKey = key;
+            const p = palettes[key];
+
+            // 1. Alterna estado ativo dos botões no painel esquerdo
+            document.querySelectorAll('[id^="btn-"]').forEach(btn => {
+                btn.className = "w-full flex items-center justify-between p-3.5 rounded-2xl border bg-slate-900/40 hover:bg-slate-900/80 transition text-left border-slate-800";
+            });
+            document.getElementById(`btn-${key}`).className = "w-full flex items-center justify-between p-3.5 rounded-2xl border bg-slate-900/80 transition text-left border-emerald-500/50 shadow-md shadow-emerald-900/10";
+
+            document.querySelectorAll('[id^="check-"]').forEach(el => el.classList.add('hidden'));
+            document.getElementById(`check-${key}`).classList.remove('hidden');
+
+            // 2. Aplica as cores de fundo e texto no celular
+            const appScreen = document.getElementById('app-screen');
+            appScreen.style.backgroundColor = p.bg;
+
+            const appBrand = document.getElementById('app-brand');
+            appBrand.style.color = p.text;
+
+            // 3. Atualiza as tags do perfil
+            document.querySelectorAll('.app-tag').forEach(tag => {
+                tag.style.backgroundColor = p.bg;
+                tag.style.borderColor = p.support;
+                tag.style.color = p.text;
+            });
+
+            // 4. Atualiza os botões e detalhes em destaque (Accent)
+            document.getElementById('badge-verified').style.backgroundColor = p.accent;
+            document.getElementById('match-percent').style.backgroundColor = p.accent;
+            document.getElementById('testimony-text').style.borderColor = p.accent;
+            document.getElementById('btn-interest').style.backgroundColor = p.accent;
+
+            // 5. Atualiza as sub-tags (interesses) com opacidade suave
+            document.querySelectorAll('.app-subtag').forEach(subtag => {
+                subtag.style.backgroundColor = `${p.accent}15`; // 15 em hex para opacidade suave
+                subtag.style.color = p.accent;
+            });
+
+            // 6. Altera a cor padrão do photo-container (gradiente de fundo)
+            const photoContainer = document.getElementById('photo-container');
+            if (!photoContainer.dataset.hasImage) {
+                photoContainer.style.backgroundImage = `linear-gradient(135deg, ${p.bg} 0%, ${p.support} 100%)`;
+            }
+
+            // 7. Atualiza o indicador textual da regra de injeção de cores no painel
+            document.getElementById('color-rule-hint').innerHTML = `✨ A paleta <b>${p.name}</b> será injetada para garantir a harmonia cromática nas fotos!`;
+        }
+
+        // Seleciona um Preset e escreve no input do Prompt
+        function selectPreset(type) {
+            const p = palettes[currentPaletteKey];
+            const basePrompt = prompts[type];
+            document.getElementById('prompt-input').value = basePrompt + p.promptColors;
+        }
+
+        // Executa Chamada com Retries e Backoff Exponencial
+        async function fetchWithRetry(url, options, retries = 5, delay = 1000) {
+            try {
+                const response = await fetch(url, options);
+                if (!response.ok) {
+                    const errText = await response.text();
+                    throw new Error(`HTTP error! status: ${response.status} - ${errText}`);
+                }
+                return await response.json();
+            } catch (error) {
+                if (retries > 0) {
+                    await new Promise(resolve => setTimeout(resolve, delay));
+                    return fetchWithRetry(url, options, retries - 1, delay * 2);
+                }
+                throw error;
+            }
+        }
+
+        // Função Principal de Geração de Imagem via Imagen 4.0
+        async function generateAIImage() {
+            const promptText = document.getElementById('prompt-input').value.trim();
+            const btnGenerate = document.getElementById('btn-generate');
+            const errorBox = document.getElementById('error-box');
+            const loadingSpinner = document.getElementById('loading-spinner');
+            const photoPlaceholder = document.getElementById('photo-placeholder');
+            const photoContainer = document.getElementById('photo-container');
+
+            if (!promptText) {
+                errorBox.innerText = "Por favor, digite uma descrição ou selecione um preset de estilo ao lado.";
+                errorBox.classList.remove('hidden');
+                return;
+            }
+
+            // Ativa o Loading State
+            errorBox.classList.add('hidden');
+            loadingSpinner.classList.remove('hidden');
+            btnGenerate.disabled = true;
+            document.getElementById('btn-icon').innerText = "⏳";
+            document.getElementById('btn-text').innerText = "Gerando Imagem...";
+
+            // Configuração do Endpoint de Imagem (Imagen 4.0 - predict)
+            const url = `https://generativelanguage.googleapis.com/v1beta/models/imagen-4.0-generate-001:predict?key=${apiKey}`;
+
+            const payload = {
+                instances: [
+                    { prompt: promptText }
+                ],
+                parameters: {
+                    sampleCount: 1,
+                    aspectRatio: "1:1" // Formato quadrado do card do app
+                }
+            };
+
+            try {
+                const result = await fetchWithRetry(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                // Valida resposta da API
+                if (result.predictions && result.predictions[0] && result.predictions[0].bytesBase64Encoded) {
+                    const base64Data = result.predictions[0].bytesBase64Encoded;
+                    const imageUrl = `data:image/png;base64,${base64Data}`;
+
+                    // Aplica a imagem de IA gerada no container
+                    photoContainer.style.backgroundImage = `url(${imageUrl})`;
+                    photoContainer.dataset.hasImage = "true";
+                    photoPlaceholder.classList.add('hidden');
+                } else {
+                    throw new Error("Formato de resposta inesperado da API de geração de imagens.");
+                }
+
+            } catch (error) {
+                console.error(error);
+                errorBox.innerText = `Ocorreu um erro técnico: não foi possível gerar a imagem de inteligência artificial. Verifique se a chave de API está configurada. Detalhes: ${error.message}`;
+                errorBox.classList.remove('hidden');
+            } finally {
+                // Remove o Loading State
+                loadingSpinner.classList.add('hidden');
+                btnGenerate.disabled = false;
+                document.getElementById('btn-icon').innerText = "⚡";
+                document.getElementById('btn-text').innerText = "Gerar Foto de Perfil com IA";
+            }
+        }
+
+        // Inicialização com a Paleta Linho padrão e preenchimento de prompt sugerido
+        window.onload = function() {
+            applyPalette('linho');
+            selectPreset('casal');
+        };
+    </script>
+</body>
+</html>
+
+```
